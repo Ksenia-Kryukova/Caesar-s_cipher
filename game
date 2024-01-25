@@ -1,0 +1,66 @@
+english = list('abcdefghijklmnopqrstuvwxyz')
+russian = list('абвгдежзийклмнопрстуфхцчшщъыьэюя')
+
+def is_encryption():
+    direction = input('Вы хотите зашифровать текст или дешифровать? (ответьте з или д)')
+    language = input('Какой вы используете язык? (ответьте ru или en)')
+    key = int(input('Какой используется шаг сдвига вправо? (введите целое число)'))
+    phrase = input('Введите ваш текст')
+    
+    if direction == 'з':
+        if language == 'ru':
+            new_phrase = ''
+            for i in range(len(phrase)):
+                if phrase[i].lower() in russian:
+                    y = russian.index(phrase[i].lower())
+                    if phrase[i] == phrase[i].upper():
+                        new_phrase += russian[(y + key) % 32].upper()
+                    else:
+                        new_phrase += russian[(y + key) % 32]
+                else:
+                    new_phrase += phrase[i] 
+            print(new_phrase)
+        
+        else:
+            new_phrase = ''
+            for i in range(len(phrase)):
+                if phrase[i].lower() in english:
+                    y = english.index(phrase[i].lower())
+                    if phrase[i] == phrase[i].upper():
+                        new_phrase += english[(y + key) % 26].upper()
+                    else:
+                        new_phrase += english[(y + key) % 26]
+                else:
+                    new_phrase += phrase[i] 
+            print(new_phrase)
+    
+    else:
+        if language == 'ru':
+            new_phrase = ''
+            for i in range(len(phrase)):
+                if phrase[i].lower() in russian:
+                    y = russian.index(phrase[i].lower())
+                    if phrase[i] == phrase[i].upper():
+                        new_phrase += russian[(y - key) % 32].upper()
+                    else:
+                        new_phrase += russian[(y - key) % 32]
+                else:
+                    new_phrase += phrase[i] 
+            print(new_phrase)
+        
+        else:
+            new_phrase = ''
+            for i in range(len(phrase)):
+                if phrase[i].lower() in english:
+                    y = english.index(phrase[i].lower())
+                    if phrase[i] == phrase[i].upper():
+                        new_phrase += english[(y - key) % 26].upper()
+                    else:
+                        new_phrase += english[(y - key) % 26]
+                else:
+                    new_phrase += phrase[i] 
+            print(new_phrase)
+    
+    
+print('Добро пожаловать в программу Шифр Цезаря!')
+is_encryption()
